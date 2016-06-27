@@ -15,4 +15,6 @@ const Container = (value) => {
   return api
 }
 
+Container.of = (x) => Container(x)
+
 export default Container

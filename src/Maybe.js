@@ -10,16 +10,17 @@ const Maybe = (value) => {
     of: (arg) => Maybe(arg),
     map: (func) => notNil(value => Maybe(func(value))),
     flatMap: (func) => notNil(value => Maybe(func(value).value)),
-    ap: (x) => {
-      return match(
-      [isAMonad, (m) => m.map(value)],
-      [yes, (v) => Maybe(v).map(value)]
-    )(x)
-  },
+    ap: match(
+        [nil, (x) => Maybe.of(x)],
+        [isAMonad, (m) => m.map(value)],
+        [yes, (v) => Maybe(v).map(value)]
+      ),
     error: (f) => nil(value) ? f() : false
   }
 
   return api
 }
+
+Maybe.of = (x) => Maybe(x)
 
 export default Maybe

@@ -23,4 +23,7 @@ const IO = (val) => {
   return api
 }
 
+IO.of = (x) => IO(x)
+
+
 export default IO
