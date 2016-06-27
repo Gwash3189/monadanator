@@ -10,7 +10,8 @@ const Maybe = (value) => {
     of: (arg) => Maybe(arg),
     map: (func) => notNil(value => Maybe(func(value))),
     flatMap: (func) => notNil(value => Maybe(func(value).value)),
-    ap: (container) => notNil(value => Maybe(value(container.value)))
+    ap: (container) => notNil(value => Maybe(value(container.value))),
+    error: (f) => nil(value) ? f() : false
   }
 
   return api

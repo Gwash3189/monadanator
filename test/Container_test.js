@@ -24,8 +24,20 @@ describe('Container', function () {
       .to.eql(6)
   })
 
-  it('unwraps the double container', function() {
+  it('unwraps the double container', function () {
     expect(container.flatMap(x => Container(x + 3)).value)
       .to.eql(6)
+  })
+
+  it('applies a monad to a stored function', function () {
+    const cont = Container((x) => x)
+    expect(cont.ap(container.of(true)))
+      .to.be.ok
+  })
+
+  it('applies a value to a stored function', function () {
+    const cont = Container((x) => x)
+    expect(cont.ap(true))
+      .to.be.ok
   })
 })

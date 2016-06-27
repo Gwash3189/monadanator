@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepublish": "npm run test && npm run lint && npm run build",
     "build": "babel ./src --out-dir ./dist",
     "build:watch": "babel ./src --out-dir ./dist --watch",
     "lint": "eslint ./src",

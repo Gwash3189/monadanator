@@ -33,4 +33,11 @@ describe('Maybe', function () {
     expect(mapSpy.called)
       .to.not.be.true
   })
+
+  it('does calls the error spy if it is given null or undefined', () => {
+    Maybe(null).error(mapSpy)
+
+    expect(mapSpy.called)
+      .to.be.true
+  })
 })
