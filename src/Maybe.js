@@ -1,4 +1,4 @@
-import { nil } from './helpers'
+import { nil, match, isAMonad, yes } from './helpers'
 
 const isNotNil = (x) => (f) => nil(x) ? Maybe(x) : f(x)
 
@@ -10,7 +10,12 @@ const Maybe = (value) => {
     of: (arg) => Maybe(arg),
     map: (func) => notNil(value => Maybe(func(value))),
     flatMap: (func) => notNil(value => Maybe(func(value).value)),
-    ap: (container) => notNil(value => Maybe(value(container.value))),
+    ap: (x) => {
+      return match(
+      [isAMonad, (m) => m.map(value)],
+      [yes, (v) => Maybe(v).map(value)]
+    )(x)
+  },
     error: (f) => nil(value) ? f() : false
   }
 

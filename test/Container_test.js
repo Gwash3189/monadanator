@@ -31,13 +31,13 @@ describe('Container', function () {
 
   it('applies a monad to a stored function', function () {
     const cont = Container((x) => x)
-    expect(cont.ap(container.of(true)))
-      .to.be.ok
+    expect(cont.ap(container.of(true)).value)
+      .to.be.true
   })
 
   it('applies a value to a stored function', function () {
     const cont = Container((x) => x)
-    expect(cont.ap(true))
-      .to.be.ok
+    expect(cont.ap(true).value)
+      .to.be.true
   })
 })
