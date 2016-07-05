@@ -25,5 +25,4 @@ const IO = (val) => {
 
 IO.of = (x) => IO(x)
 
-
 export default IO

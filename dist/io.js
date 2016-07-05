@@ -29,14 +29,18 @@ var IO = function IO(val) {
         return func(api.value).value;
       });
     },
-    ap: function ap(container) {
-      return IO(function () {
-        return value(container.value);
-      });
-    }
+    ap: (0, _helpers.match)([_helpers.isAMonad, function (m) {
+      return m.map(value);
+    }], [_helpers.yes, function (v) {
+      return IO(v).map(value);
+    }])
   };
 
   return api;
+};
+
+IO.of = function (x) {
+  return IO(x);
 };
 
 exports.default = IO;

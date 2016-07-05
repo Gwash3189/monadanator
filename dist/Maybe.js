@@ -30,14 +30,23 @@ var Maybe = function Maybe(value) {
         return Maybe(func(value).value);
       });
     },
-    ap: function ap(container) {
-      return notNil(function (value) {
-        return Maybe(value(container.value));
-      });
+    ap: (0, _helpers.match)([_helpers.nil, function (x) {
+      return Maybe.of(x);
+    }], [_helpers.isAMonad, function (m) {
+      return m.map(value);
+    }], [_helpers.yes, function (v) {
+      return Maybe(v).map(value);
+    }]),
+    error: function error(f) {
+      return (0, _helpers.nil)(value) ? f() : false;
     }
   };
 
   return api;
+};
+
+Maybe.of = function (x) {
+  return Maybe(x);
 };
 
 exports.default = Maybe;
