@@ -9,14 +9,14 @@ var _helpers = require('./helpers');
 var Container = function Container(value) {
   var api = {
     value: value,
-    of: function of(arg) {
-      return Container(arg);
-    },
     map: function map(func) {
       return Container(func(value));
     },
     flatMap: function flatMap(func) {
-      return Container(func(value).value);
+      return Container((0, _helpers.extract)(func(value)));
+    },
+    of: function of(arg) {
+      return Container(arg);
     },
     ap: (0, _helpers.match)([_helpers.isAMonad, function (m) {
       return m.map(value);

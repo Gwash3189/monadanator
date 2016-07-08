@@ -1,11 +1,11 @@
-import { match, isAMonad, yes } from './helpers'
+import { match, isAMonad, extract, yes } from './helpers'
 
 const Container = (value) => {
   const api = {
     value,
-    of: (arg) => Container(arg),
     map: (func) => Container(func(value)),
-    flatMap: (func) => Container(func(value).value),
+    flatMap: (func) => Container(extract(func(value))),
+    of: (arg) => Container(arg),
     ap: match(
         [isAMonad, (m) => m.map(value)],
         [yes, (v) => Container(v).map(value)]

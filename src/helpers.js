@@ -8,12 +8,21 @@ export const call = (verb, ...firstArgs) => (...secondArgs) => (app) => {
 }
 
 export const pluck = (path) => (x) => x[path]
-
+export const extract = pluck('value')
 export const isAMonad = (m) => !!(pluck('map')(m) && pluck('flatMap')(m))
 export const nil = (x) => x === null || x === undefined
-export const isA = (str) => (x) => typeof x === str
+export const isA = (thing) => (x) => {
+  if (typeof x === thing) {
+    return true
+  } else if (typeof thing === 'function' && x instanceof thing) {
+    return true
+  }
+
+  return false
+}
 export const isAFunction = isA('function')
 export const isAString = isA('string')
+export const isAnError = isA(Error)
 export const perform = call('perform')()
 export const run = (...ios) => ios.forEach(perform)
 export const repeat = (io) => ({

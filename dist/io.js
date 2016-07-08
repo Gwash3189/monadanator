@@ -26,7 +26,7 @@ var IO = function IO(val) {
     },
     flatMap: function flatMap(func) {
       return IO(function () {
-        return func(api.value).value;
+        return (0, _helpers.extract)(func(api.value));
       });
     },
     ap: (0, _helpers.match)([_helpers.isAMonad, function (m) {

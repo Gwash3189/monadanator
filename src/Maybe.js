@@ -1,15 +1,23 @@
-import { nil, match, isAMonad, yes } from './helpers'
+import { nil, match, extract, isAMonad, yes, isAnError } from './helpers'
 
-const isNotNil = (x) => (f) => nil(x) ? Maybe(x) : f(x)
-
+const acceptableValue = (x) => !nil(x) && !isAnError(x)
+const handle = (f, onError) => (x) => {
+  try {
+    return f(x)
+  } catch (e) {
+    return onError(e)
+  }
+}
 const Maybe = (value) => {
-  const notNil = isNotNil(value)
-
   const api = {
     value,
     of: (arg) => Maybe(arg),
-    map: (func) => notNil(value => Maybe(func(value))),
-    flatMap: (func) => notNil(value => Maybe(func(value).value)),
+    map: handle((func) => acceptableValue(value)
+        ? Maybe(func(value))
+        : Maybe(value), Maybe),
+    flatMap: handle((func) => acceptableValue(value)
+        ? Maybe(extract(func(value)))
+        : Maybe(value), Maybe),
     ap: match(
         [nil, (x) => Maybe.of(x)],
         [isAMonad, (m) => m.map(value)],

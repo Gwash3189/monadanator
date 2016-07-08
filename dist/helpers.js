@@ -38,20 +38,27 @@ var pluck = exports.pluck = function pluck(path) {
     return x[path];
   };
 };
-
+var extract = exports.extract = pluck('value');
 var isAMonad = exports.isAMonad = function isAMonad(m) {
   return !!(pluck('map')(m) && pluck('flatMap')(m));
 };
 var nil = exports.nil = function nil(x) {
   return x === null || x === undefined;
 };
-var isA = exports.isA = function isA(str) {
+var isA = exports.isA = function isA(thing) {
   return function (x) {
-    return (typeof x === 'undefined' ? 'undefined' : _typeof(x)) === str;
+    if ((typeof x === 'undefined' ? 'undefined' : _typeof(x)) === thing) {
+      return true;
+    } else if (typeof thing === 'function' && x instanceof thing) {
+      return true;
+    }
+
+    return false;
   };
 };
 var isAFunction = exports.isAFunction = isA('function');
 var isAString = exports.isAString = isA('string');
+var isAnError = exports.isAnError = isA(Error);
 var perform = exports.perform = call('perform')();
 var run = exports.run = function run() {
   for (var _len3 = arguments.length, ios = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {

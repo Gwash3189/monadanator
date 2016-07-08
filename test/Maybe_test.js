@@ -35,7 +35,7 @@ describe('Maybe', function () {
   })
 
   it('does calls the error spy if it is given null or undefined', () => {
-    Maybe(null).error(mapSpy)
+    Maybe(undefined).error(mapSpy)
 
     expect(mapSpy.called)
       .to.be.true
@@ -51,5 +51,13 @@ describe('Maybe', function () {
     const may = Maybe((x) => x)
     expect(may.ap(true).value)
       .to.be.true
+  })
+
+  it('handles thrown errors', function () {
+    const err = new Error('no!')
+    const may = Maybe(true)
+
+    expect(may.map((x) => x).map(x => { throw err }).flatMap(x => Maybe(3)).value)
+      .to.eql(err)
   })
 })
