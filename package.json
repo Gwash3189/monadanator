@@ -9,7 +9,8 @@
     "build:watch": "babel ./src --out-dir ./dist --watch",
     "lint": "eslint ./src",
     "test": "mocha --compilers js:babel-register './test/**/*.js'",
-    "test:watch": "mocha --watch --compilers js:babel-register './test/**/*.js'"
+    "test:watch": "mocha --watch --compilers js:babel-register './test/**/*.js'",
+    "test:debug": "mocha debug --watch --compilers js:babel-register './test/**/*.js'"
   },
   "dependencies": {
     "es6-promise": "^3.2.1",
