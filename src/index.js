@@ -5,5 +5,5 @@ import * as Helpers from './helpers'
 
 export const io = IO
 export const maybe = Maybe
-export const containrer = Container
+export const container = Container
 export const helpers = Helpers

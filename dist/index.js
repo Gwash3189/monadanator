@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.helpers = exports.containrer = exports.maybe = exports.io = undefined;
+exports.helpers = exports.container = exports.maybe = exports.io = undefined;
 
 var _io = require('./io');
 
@@ -27,5 +27,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var io = exports.io = _io2.default;
 var maybe = exports.maybe = _Maybe2.default;
-var containrer = exports.containrer = _Container2.default;
+var container = exports.container = _Container2.default;
 var helpers = exports.helpers = Helpers;
