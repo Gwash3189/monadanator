@@ -2,7 +2,7 @@
   "name": "monadanator",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run test && npm run lint && npm run build",
     "build": "babel ./src --out-dir ./dist",
