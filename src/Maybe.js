@@ -23,7 +23,8 @@ const Maybe = (value) => {
         [isAMonad, (m) => m.map(value)],
         [yes, (v) => Maybe(v).map(value)]
       ),
-    error: (f) => nil(value) ? f() : false
+    error: (f) => nil(value) ? f() : false,
+    type: 'Maybe'
   }
 
   return api

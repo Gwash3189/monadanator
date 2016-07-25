@@ -15,14 +15,7 @@ var Container = function Container(value) {
     flatMap: function flatMap(func) {
       return Container((0, _helpers.extract)(func(value)));
     },
-    of: function of(arg) {
-      return Container(arg);
-    },
-    ap: (0, _helpers.match)([_helpers.isAMonad, function (m) {
-      return m.map(value);
-    }], [_helpers.yes, function (v) {
-      return Container(v).map(value);
-    }])
+    type: 'container'
   };
 
   return api;

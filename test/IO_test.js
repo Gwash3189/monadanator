@@ -24,16 +24,4 @@ describe('IO', () => {
     expect(io.flatMap(x => IO(x + 3)).perform())
       .to.eql(6)
   })
-
-  it('applies a monad to a stored function', function () {
-    const io = IO((x) => x)
-    expect(io.ap(IO(true)).value)
-      .to.be.true
-  })
-
-  it('applies a value to a stored function', function () {
-    const io = IO((x) => x)
-    expect(io.ap(true).value)
-      .to.be.true
-  })
 })

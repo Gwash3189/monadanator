@@ -41,18 +41,6 @@ describe('Maybe', function () {
       .to.be.true
   })
 
-  it('applies a monad to a stored function', function () {
-    const may = Maybe((x) => x)
-    expect(may.ap(Maybe(true)).value)
-      .to.be.true
-  })
-
-  it('applies a value to a stored function', function () {
-    const may = Maybe((x) => x)
-    expect(may.ap(true).value)
-      .to.be.true
-  })
-
   it('handles thrown errors', function () {
     const err = new Error('no!')
     const may = Maybe(true)

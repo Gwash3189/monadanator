@@ -33,6 +33,20 @@ var call = exports.call = function call(verb) {
   };
 };
 
+var type = exports.type = function type(_type) {
+  return function (monad) {
+    return monad.type === _type;
+  };
+};
+
+var types = exports.types = {
+  applicative: type('applicative'),
+  container: type('container'),
+  io: type('io'),
+  left: type('applicative'),
+  maybe: type('maybe'),
+  right: type('applicative')
+};
 var pluck = exports.pluck = function pluck(path) {
   return function (x) {
     return x[path];

@@ -39,7 +39,8 @@ var Maybe = function Maybe(value) {
     }]),
     error: function error(f) {
       return (0, _helpers.nil)(value) ? f() : false;
-    }
+    },
+    type: 'Maybe'
   };
 
   return api;

@@ -1,4 +1,4 @@
-import { isAFunction, isAMonad, match, extract, yes, identity, thunk } from './helpers'
+import { isAFunction, match, extract, yes, identity, thunk } from './helpers'
 
 const IO = (val) => {
   const value = match(
@@ -11,13 +11,9 @@ const IO = (val) => {
       return value()
     },
     perform: () => api.value,
-    of: (x) => IO(x),
     map: (func) => IO(() => func(api.value)),
     flatMap: (func) => IO(() => extract(func(api.value))),
-    ap: match(
-        [isAMonad, (m) => m.map(value)],
-        [yes, (v) => IO(v).map(value)]
-      )
+    type: 'io'
   }
 
   return api

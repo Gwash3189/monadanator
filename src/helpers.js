@@ -7,6 +7,16 @@ export const call = (verb, ...firstArgs) => (...secondArgs) => (app) => {
   return app
 }
 
+export const type = (type) => (monad) => monad.type === type
+
+export const types = {
+  applicative: type('applicative'),
+  container: type('container'),
+  io: type('io'),
+  left: type('applicative'),
+  maybe: type('maybe'),
+  right: type('applicative')
+}
 export const pluck = (path) => (x) => x[path]
 export const extract = pluck('value')
 export const isAMonad = (m) => !!(pluck('map')(m) && pluck('flatMap')(m))
